@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "RxCombine",
+        "repositoryURL": "https://github.com/CombineCommunity/RxCombine",
+        "state": {
+          "branch": null,
+          "revision": "3b359e4901c383532a84d95094ad688fcb87a684",
+          "version": "2.0.1"
+        }
+      },
+      {
+        "package": "RxSwift",
+        "repositoryURL": "https://github.com/ReactiveX/RxSwift",
+        "state": {
+          "branch": null,
+          "revision": "7e01c05f25c025143073eaa3be3532f9375c614b",
+          "version": "6.1.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
