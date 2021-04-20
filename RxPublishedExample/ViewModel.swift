@@ -71,6 +71,19 @@ class BaseViewModel<B: Bindable> {
                dependency: dependency,
                disposeBag: disposeBag)
     }
+}
+
+#if canImport(Combine)
+
+@dynamicMemberLookup
+protocol BaseObservableObject: ObservableObject {
+    associatedtype Input
+    associatedtype State
+    var input: InputWrapper<Input> { get }
+    var state: State { get }
+}
+
+extension BaseObservableObject {
 
     var objectWillChange: AnyPublisher<Void, Never> {
         let triggers = Mirror(reflecting: state).children
@@ -84,18 +97,7 @@ class BaseViewModel<B: Bindable> {
             .catch { _ in Just(()) }
             .eraseToAnyPublisher()
     }
-}
 
-@dynamicMemberLookup
-protocol BaseObservableObject: ObservableObject {
-    associatedtype Input
-    associatedtype State
-    var input: InputWrapper<Input> { get }
-    var state: State { get }
-}
-
-extension BaseObservableObject {
-    
     // state subscript
     subscript<Value>(dynamicMember keyPath: KeyPath<State, Value>) -> Value {
         return state[keyPath: keyPath]
@@ -115,3 +117,5 @@ extension BaseObservableObject {
         }
     }
 }
+
+#endif
