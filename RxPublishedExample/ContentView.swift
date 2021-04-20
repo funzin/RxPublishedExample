@@ -18,7 +18,7 @@ struct ContentView<VM: ContentViewModelProtocol>: View {
         Text("\(viewModel.count)")
             .padding()
         Button("Start") {
-            viewModel.didTapStartButton(())
+            viewModel.didTapStartButton()
         }
     }
 }

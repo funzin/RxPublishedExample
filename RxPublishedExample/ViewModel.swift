@@ -94,4 +94,11 @@ extension BaseObservableObject {
             input[keyPath: keyPath](value)
         }
     }
+
+    // input subscript
+    subscript(dynamicMember keyPath: KeyPath<InputWrapper<Input>, (()) -> Void>) -> () -> Void {
+        return { [input] in
+            input[keyPath: keyPath](())
+        }
+    }
 }
