@@ -32,7 +32,7 @@ final class ContentViewModel: ViewModel<ContentViewModel>, ContentViewModelProto
     struct Dependency {}
     
     struct Input {
-        let didTapStartButton = RxRelay<Void>()
+        let didTapStartButton = PublishRelay<Void>()
     }
     
     struct State {
@@ -45,11 +45,11 @@ final class ContentViewModel: ViewModel<ContentViewModel>, ContentViewModelProto
         self.init(input: .init(), state: &state, dependency: .init())
     }
     
-    static func bind(input: Input,
+    static func bind(inputObservable: InputObservable<Input>,
                      state: inout State,
                      dependency: Dependency,
                      disposeBag: DisposeBag) {
-        input.didTapStartButton
+        inputObservable.didTapStartButton
             .flatMapLatest {
                 Observable<Int>.interval(.milliseconds(100), scheduler: MainScheduler.instance)
             }
