@@ -7,29 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3391B466262EA65F00D3B466 /* Uniko in Frameworks */ = {isa = PBXBuildFile; productRef = 3391B465262EA65E00D3B466 /* Uniko */; };
 		AFCE3303262B24EE003147CE /* RxPublishedExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCE3302262B24EE003147CE /* RxPublishedExampleApp.swift */; };
 		AFCE3305262B24EE003147CE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCE3304262B24EE003147CE /* ContentView.swift */; };
 		AFCE3307262B24F0003147CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFCE3306262B24F0003147CE /* Assets.xcassets */; };
 		AFCE330A262B24F0003147CE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFCE3309262B24F0003147CE /* Preview Assets.xcassets */; };
-		AFCE3315262B2544003147CE /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AFCE3314262B2544003147CE /* RxSwift */; };
-		AFCE3317262B2544003147CE /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = AFCE3316262B2544003147CE /* RxCocoa */; };
-		AFCE3319262B2544003147CE /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = AFCE3318262B2544003147CE /* RxRelay */; };
-		AFCE331D262B2559003147CE /* RxCombine in Frameworks */ = {isa = PBXBuildFile; productRef = AFCE331C262B2559003147CE /* RxCombine */; };
-		AFCE3320262B2564003147CE /* RxPublished.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCE331F262B2564003147CE /* RxPublished.swift */; };
-		AFCE3323262B259B003147CE /* ObservableTypeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCE3322262B259B003147CE /* ObservableTypeExtension.swift */; };
-		AFCE3326262B25C0003147CE /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCE3325262B25C0003147CE /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3391B461262EA59500D3B466 /* RxPublishedExample */ = {isa = PBXFileReference; lastKnownFileType = folder; name = RxPublishedExample; sourceTree = "<group>"; };
 		AFCE32FF262B24EE003147CE /* RxPublishedExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxPublishedExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFCE3302262B24EE003147CE /* RxPublishedExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxPublishedExampleApp.swift; sourceTree = "<group>"; };
 		AFCE3304262B24EE003147CE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AFCE3306262B24F0003147CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AFCE3309262B24F0003147CE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AFCE330B262B24F0003147CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AFCE331F262B2564003147CE /* RxPublished.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxPublished.swift; sourceTree = "<group>"; };
-		AFCE3322262B259B003147CE /* ObservableTypeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableTypeExtension.swift; sourceTree = "<group>"; };
-		AFCE3325262B25C0003147CE /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,21 +29,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AFCE331D262B2559003147CE /* RxCombine in Frameworks */,
-				AFCE3319262B2544003147CE /* RxRelay in Frameworks */,
-				AFCE3317262B2544003147CE /* RxCocoa in Frameworks */,
-				AFCE3315262B2544003147CE /* RxSwift in Frameworks */,
+				3391B466262EA65F00D3B466 /* Uniko in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3391B464262EA65E00D3B466 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		AFCE32F6262B24EE003147CE = {
 			isa = PBXGroup;
 			children = (
 				AFCE3301262B24EE003147CE /* RxPublishedExample */,
+				3391B461262EA59500D3B466 /* RxPublishedExample */,
 				AFCE3300262B24EE003147CE /* Products */,
+				3391B464262EA65E00D3B466 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,9 +69,6 @@
 				AFCE3306262B24F0003147CE /* Assets.xcassets */,
 				AFCE330B262B24F0003147CE /* Info.plist */,
 				AFCE3308262B24F0003147CE /* Preview Content */,
-				AFCE331F262B2564003147CE /* RxPublished.swift */,
-				AFCE3322262B259B003147CE /* ObservableTypeExtension.swift */,
-				AFCE3325262B25C0003147CE /* ViewModel.swift */,
 			);
 			path = RxPublishedExample;
 			sourceTree = "<group>";
@@ -103,10 +98,7 @@
 			);
 			name = RxPublishedExample;
 			packageProductDependencies = (
-				AFCE3314262B2544003147CE /* RxSwift */,
-				AFCE3316262B2544003147CE /* RxCocoa */,
-				AFCE3318262B2544003147CE /* RxRelay */,
-				AFCE331C262B2559003147CE /* RxCombine */,
+				3391B465262EA65E00D3B466 /* Uniko */,
 			);
 			productName = RxPublishedExample;
 			productReference = AFCE32FF262B24EE003147CE /* RxPublishedExample.app */;
@@ -136,8 +128,6 @@
 			);
 			mainGroup = AFCE32F6262B24EE003147CE;
 			packageReferences = (
-				AFCE3313262B2544003147CE /* XCRemoteSwiftPackageReference "RxSwift" */,
-				AFCE331B262B2559003147CE /* XCRemoteSwiftPackageReference "RxCombine" */,
 			);
 			productRefGroup = AFCE3300262B24EE003147CE /* Products */;
 			projectDirPath = "";
@@ -165,11 +155,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AFCE3326262B25C0003147CE /* ViewModel.swift in Sources */,
-				AFCE3323262B259B003147CE /* ObservableTypeExtension.swift in Sources */,
 				AFCE3305262B24EE003147CE /* ContentView.swift in Sources */,
 				AFCE3303262B24EE003147CE /* RxPublishedExampleApp.swift in Sources */,
-				AFCE3320262B2564003147CE /* RxPublished.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,45 +344,10 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		AFCE3313262B2544003147CE /* XCRemoteSwiftPackageReference "RxSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ReactiveX/RxSwift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.1.0;
-			};
-		};
-		AFCE331B262B2559003147CE /* XCRemoteSwiftPackageReference "RxCombine" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/CombineCommunity/RxCombine";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		AFCE3314262B2544003147CE /* RxSwift */ = {
+		3391B465262EA65E00D3B466 /* Uniko */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AFCE3313262B2544003147CE /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxSwift;
-		};
-		AFCE3316262B2544003147CE /* RxCocoa */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AFCE3313262B2544003147CE /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxCocoa;
-		};
-		AFCE3318262B2544003147CE /* RxRelay */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AFCE3313262B2544003147CE /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxRelay;
-		};
-		AFCE331C262B2559003147CE /* RxCombine */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AFCE331B262B2559003147CE /* XCRemoteSwiftPackageReference "RxCombine" */;
-			productName = RxCombine;
+			productName = Uniko;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

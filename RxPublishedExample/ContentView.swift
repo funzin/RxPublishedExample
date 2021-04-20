@@ -10,23 +10,26 @@ import RxSwift
 import RxRelay
 import RxCombine
 import Combine
+import Uniko
 
-struct ContentView<VM: ContentViewModelProtocol>: View {
+struct ContentView<VM: ContentViewModelProtocol & ObservableObject>: View {
     @StateObject var viewModel: VM
     
     var body: some View {
         Text("\(viewModel.count)")
             .padding()
         Button("Start") {
-            viewModel.didTapStartButton(())
+            viewModel.didTapStartButton()
         }
     }
 }
 
-protocol ContentViewModelProtocol: BaseObservableObject where State == ContentViewModel.State,
-                                                              Input == ContentViewModel.Input {
+// NOTE: Can use for non-SwiftUI.
+protocol ContentViewModelProtocol: ViewModelProtocol where State == ContentViewModel.State,
+                                                           Input == ContentViewModel.Input {
 }
 
+// NOTE: Can use for non-SwiftUI.
 final class ContentViewModel: ViewModel<ContentViewModel>, ContentViewModelProtocol {
     
     struct Dependency {}
@@ -51,18 +54,12 @@ final class ContentViewModel: ViewModel<ContentViewModel>, ContentViewModelProto
                      disposeBag: DisposeBag) {
         inputObservable.didTapStartButton
             .flatMapLatest {
-                Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
+                Observable<Int>.interval(.milliseconds(100), scheduler: MainScheduler.instance)
             }
             .assign(to: &state.$count)
     }
-    
-    var objectWillChange: AnyPublisher<Void, Never> {
-        return state.$count
-            .skip(1)
-            .map { _ in }
-            .asPublisher()
-            .catch { _ in Just(()) }
-            .eraseToAnyPublisher()
-    }
 }
 
+#if canImport(Combine)
+extension ContentViewModel: ObservableObject {}
+#endif
