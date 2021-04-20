@@ -73,36 +73,20 @@ class BaseViewModel<B: Bindable> {
     }
 }
 
-#if canImport(Combine)
-
 @dynamicMemberLookup
-protocol BaseObservableObject: ObservableObject {
+protocol ViewModelProtocol {
     associatedtype Input
     associatedtype State
     var input: InputWrapper<Input> { get }
     var state: State { get }
 }
 
-extension BaseObservableObject {
-
-    var objectWillChange: AnyPublisher<Void, Never> {
-        let triggers = Mirror(reflecting: state).children
-            .compactMap { $0.value as? RxPublishedType }
-            .map { $0.asTriggerObservable() }
-
-        return Observable.merge(triggers)
-            .skip(1)
-            .map { _ in }
-            .asPublisher()
-            .catch { _ in Just(()) }
-            .eraseToAnyPublisher()
-    }
-
+extension ViewModelProtocol {
     // state subscript
     subscript<Value>(dynamicMember keyPath: KeyPath<State, Value>) -> Value {
         return state[keyPath: keyPath]
     }
-    
+
     // input subscript
     subscript<Value>(dynamicMember keyPath: KeyPath<InputWrapper<Input>, (Value) -> Void>) -> (Value) -> Void {
         return { [input] value in
@@ -115,6 +99,24 @@ extension BaseObservableObject {
         return { [input] in
             input[keyPath: keyPath](())
         }
+    }
+}
+
+#if canImport(Combine)
+
+extension ObservableObject where Self: ViewModelProtocol {
+
+    var objectWillChange: AnyPublisher<Void, Never> {
+        let triggers = Mirror(reflecting: state).children
+            .compactMap { $0.value as? RxPublishedType }
+            .map { $0.asTriggerObservable() }
+
+        return Observable.merge(triggers)
+            .skip(1)
+            .map { _ in }
+            .asPublisher()
+            .catch { _ in Just(()) }
+            .eraseToAnyPublisher()
     }
 }
 

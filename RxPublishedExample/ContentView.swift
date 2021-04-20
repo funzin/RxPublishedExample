@@ -11,7 +11,7 @@ import RxRelay
 import RxCombine
 import Combine
 
-struct ContentView<VM: ContentViewModelProtocol>: View {
+struct ContentView<VM: ContentViewModelProtocol & ObservableObject>: View {
     @StateObject var viewModel: VM
     
     var body: some View {
@@ -23,10 +23,12 @@ struct ContentView<VM: ContentViewModelProtocol>: View {
     }
 }
 
-protocol ContentViewModelProtocol: BaseObservableObject where State == ContentViewModel.State,
-                                                              Input == ContentViewModel.Input {
+// NOTE: Can use for non-SwiftUI.
+protocol ContentViewModelProtocol: ViewModelProtocol where State == ContentViewModel.State,
+                                                           Input == ContentViewModel.Input {
 }
 
+// NOTE: Can use for non-SwiftUI.
 final class ContentViewModel: ViewModel<ContentViewModel>, ContentViewModelProtocol {
     
     struct Dependency {}
@@ -57,3 +59,6 @@ final class ContentViewModel: ViewModel<ContentViewModel>, ContentViewModelProto
     }
 }
 
+#if canImport(Combine)
+extension ContentViewModel: ObservableObject {}
+#endif
