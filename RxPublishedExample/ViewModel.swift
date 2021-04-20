@@ -43,6 +43,19 @@ class BaseViewModel<B: Bindable> {
                dependency: dependency,
                disposeBag: disposeBag)
     }
+
+    var objectWillChange: AnyPublisher<Void, Never> {
+        let triggers = Mirror(reflecting: state).children
+            .compactMap { $0.value as? RxPublishedType }
+            .map { $0.asTriggerObservable() }
+
+        return Observable.merge(triggers)
+            .skip(1)
+            .map { _ in }
+            .asPublisher()
+            .catch { _ in Just(()) }
+            .eraseToAnyPublisher()
+    }
 }
 
 @dynamicMemberLookup

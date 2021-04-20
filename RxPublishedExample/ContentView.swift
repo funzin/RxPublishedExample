@@ -51,13 +51,17 @@ final class ContentViewModel: ViewModel<ContentViewModel>, ContentViewModelProto
                      disposeBag: DisposeBag) {
         input.didTapStartButton
             .flatMapLatest {
-                Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
+                Observable<Int>.interval(.milliseconds(100), scheduler: MainScheduler.instance)
             }
             .assign(to: &state.$count)
     }
-    
-    var objectWillChange: AnyPublisher<Void, Never> {
-        return state.$count
+
+    override var objectWillChange: AnyPublisher<Void, Never> {
+        let triggers = Mirror(reflecting: state).children
+            .compactMap { $0.value as? RxPublishedType }
+            .map { $0.asTriggerObservable() }
+
+        return Observable.merge(triggers)
             .skip(1)
             .map { _ in }
             .asPublisher()
