@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		33F83E6F262E8D540016274C /* RxRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F83E6E262E8D540016274C /* RxRelay.swift */; };
 		AFCE3303262B24EE003147CE /* RxPublishedExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCE3302262B24EE003147CE /* RxPublishedExampleApp.swift */; };
 		AFCE3305262B24EE003147CE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCE3304262B24EE003147CE /* ContentView.swift */; };
 		AFCE3307262B24F0003147CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFCE3306262B24F0003147CE /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		33F83E6E262E8D540016274C /* RxRelay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxRelay.swift; sourceTree = "<group>"; };
 		AFCE32FF262B24EE003147CE /* RxPublishedExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxPublishedExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFCE3302262B24EE003147CE /* RxPublishedExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxPublishedExampleApp.swift; sourceTree = "<group>"; };
 		AFCE3304262B24EE003147CE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				AFCE330B262B24F0003147CE /* Info.plist */,
 				AFCE3308262B24F0003147CE /* Preview Content */,
 				AFCE331F262B2564003147CE /* RxPublished.swift */,
+				33F83E6E262E8D540016274C /* RxRelay.swift */,
 				AFCE3322262B259B003147CE /* ObservableTypeExtension.swift */,
 				AFCE3325262B25C0003147CE /* ViewModel.swift */,
 			);
@@ -170,6 +173,7 @@
 				AFCE3305262B24EE003147CE /* ContentView.swift in Sources */,
 				AFCE3303262B24EE003147CE /* RxPublishedExampleApp.swift in Sources */,
 				AFCE3320262B2564003147CE /* RxPublished.swift in Sources */,
+				33F83E6F262E8D540016274C /* RxRelay.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

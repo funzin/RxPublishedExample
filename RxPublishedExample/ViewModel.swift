@@ -16,7 +16,7 @@ protocol Bindable {
     associatedtype State
     associatedtype Dependency
     
-    static func bind(inputObservable: InputObservable<Input>,
+    static func bind(input: Input,
                      state: inout State,
                      dependency: Dependency,
                      disposeBag: DisposeBag)
@@ -24,49 +24,21 @@ protocol Bindable {
 
 typealias ViewModel<B: Bindable> = BaseViewModel<B> & Bindable
 
-@dynamicMemberLookup
-struct InputWrapper<Input> {
-    private let input: Input
-    
-    init(input: Input) {
-        self.input = input
-    }
-    
-    subscript<Value>(dynamicMember keyPath: KeyPath<Input, PublishRelay<Value>>) -> (Value) -> Void {
-        return { [input] value in
-            input[keyPath: keyPath].accept(value)
-        }
-    }
-}
-
-@dynamicMemberLookup
-final class InputObservable<Input> {
-    private let input: Input
-    
-    init(input: Input) {
-        self.input = input
-    }
-    
-    subscript<Value>(dynamicMember keyPath: KeyPath<Input, PublishRelay<Value>>) -> Observable<Value> {
-        return input[keyPath: keyPath].asObservable()
-    }
-}
-
 class BaseViewModel<B: Bindable> {
     typealias Input = B.Input
     typealias State = B.State
     typealias Dependency = B.Dependency
     
-    let input: InputWrapper<Input>
+    let input: Input
     private(set) var state: State
     private let disposeBag = DisposeBag()
     
     init(input: Input,
          state: inout State,
          dependency: Dependency) {
-        self.input = InputWrapper(input: input)
+        self.input = input
         self.state = state
-        B.bind(inputObservable: InputObservable(input: input),
+        B.bind(input: input,
                state: &state,
                dependency: dependency,
                disposeBag: disposeBag)
@@ -77,7 +49,7 @@ class BaseViewModel<B: Bindable> {
 protocol BaseObservableObject: ObservableObject {
     associatedtype Input
     associatedtype State
-    var input: InputWrapper<Input> { get }
+    var input: Input { get }
     var state: State { get }
 }
 
@@ -89,14 +61,14 @@ extension BaseObservableObject {
     }
     
     // input subscript
-    subscript<Value>(dynamicMember keyPath: KeyPath<InputWrapper<Input>, (Value) -> Void>) -> (Value) -> Void {
+    subscript<Value>(dynamicMember keyPath: KeyPath<Input, RxRelay<Value>>) -> (Value) -> Void {
         return { [input] value in
             input[keyPath: keyPath](value)
         }
     }
 
     // input subscript
-    subscript(dynamicMember keyPath: KeyPath<InputWrapper<Input>, (()) -> Void>) -> () -> Void {
+    subscript(dynamicMember keyPath: KeyPath<Input, RxRelay<Void>>) -> () -> Void {
         return { [input] in
             input[keyPath: keyPath](())
         }
