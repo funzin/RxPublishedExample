@@ -10,6 +10,7 @@ import RxSwift
 import RxRelay
 import RxCombine
 import Combine
+import Uniko
 
 struct ContentView<VM: ContentViewModelProtocol & ObservableObject>: View {
     @StateObject var viewModel: VM

@@ -19,11 +19,11 @@ extension RxPublishedType where Self: ObservableType {
 }
 
 @propertyWrapper
-struct RxPublished<Value>: ObservableType, RxPublishedType {
+public struct RxPublished<Value>: ObservableType, RxPublishedType {
     private let relay: BehaviorRelay<Value>
     private let disposeBag = DisposeBag()
     
-    var wrappedValue: Value {
+    public var wrappedValue: Value {
         get {
             relay.value
         }
@@ -32,7 +32,7 @@ struct RxPublished<Value>: ObservableType, RxPublishedType {
         }
     }
     
-    var projectedValue: Observable<Value> {
+    public var projectedValue: Observable<Value> {
         get {
             relay.asObservable()
         }
@@ -43,17 +43,17 @@ struct RxPublished<Value>: ObservableType, RxPublishedType {
         }
     }
     
-    init(relay: BehaviorRelay<Value>) {
+    public init(relay: BehaviorRelay<Value>) {
         self.relay = relay
     }
     
-    init(wrappedValue initialValue: Value) {
+    public init(wrappedValue initialValue: Value) {
         self.relay = .init(value: initialValue)
     }
 
-    func subscribe<Observer>(_ observer: Observer) -> Disposable where Observer : ObserverType, Self.Element == Observer.Element {
+    public func subscribe<Observer>(_ observer: Observer) -> Disposable where Observer : ObserverType, Self.Element == Observer.Element {
         relay.subscribe(observer)
     }
 
-    typealias Element = Value
+    public typealias Element = Value
 }

@@ -11,7 +11,7 @@ import RxRelay
 import Combine
 import RxCombine
 
-protocol Bindable {
+public protocol Bindable {
     associatedtype Input
     associatedtype State
     associatedtype Dependency
@@ -22,17 +22,17 @@ protocol Bindable {
                      disposeBag: DisposeBag)
 }
 
-typealias ViewModel<B: Bindable> = BaseViewModel<B> & Bindable
+public typealias ViewModel<B: Bindable> = BaseViewModel<B> & Bindable
 
 @dynamicMemberLookup
-struct InputWrapper<Input> {
+public struct InputWrapper<Input> {
     private let input: Input
     
     init(input: Input) {
         self.input = input
     }
     
-    subscript<Value>(dynamicMember keyPath: KeyPath<Input, PublishRelay<Value>>) -> (Value) -> Void {
+    public subscript<Value>(dynamicMember keyPath: KeyPath<Input, PublishRelay<Value>>) -> (Value) -> Void {
         return { [input] value in
             input[keyPath: keyPath].accept(value)
         }
@@ -40,30 +40,26 @@ struct InputWrapper<Input> {
 }
 
 @dynamicMemberLookup
-final class InputObservable<Input> {
+public struct InputObservable<Input> {
     private let input: Input
     
     init(input: Input) {
         self.input = input
     }
     
-    subscript<Value>(dynamicMember keyPath: KeyPath<Input, PublishRelay<Value>>) -> Observable<Value> {
+    public subscript<Value>(dynamicMember keyPath: KeyPath<Input, PublishRelay<Value>>) -> Observable<Value> {
         return input[keyPath: keyPath].asObservable()
     }
 }
 
-class BaseViewModel<B: Bindable> {
-    typealias Input = B.Input
-    typealias State = B.State
-    typealias Dependency = B.Dependency
-    
-    let input: InputWrapper<Input>
-    private(set) var state: State
+open class BaseViewModel<B: Bindable>: ViewModelProtocol {
+    public let input: InputWrapper<B.Input>
+    public private(set) var state: B.State
     private let disposeBag = DisposeBag()
     
-    init(input: Input,
-         state: inout State,
-         dependency: Dependency) {
+    public init(input: B.Input,
+                state: inout B.State,
+                dependency: B.Dependency) {
         self.input = InputWrapper(input: input)
         self.state = state
         B.bind(inputObservable: InputObservable(input: input),
@@ -74,7 +70,7 @@ class BaseViewModel<B: Bindable> {
 }
 
 @dynamicMemberLookup
-protocol ViewModelProtocol {
+public protocol ViewModelProtocol {
     associatedtype Input
     associatedtype State
     var input: InputWrapper<Input> { get }
@@ -83,19 +79,19 @@ protocol ViewModelProtocol {
 
 extension ViewModelProtocol {
     // state subscript
-    subscript<Value>(dynamicMember keyPath: KeyPath<State, Value>) -> Value {
+    public subscript<Value>(dynamicMember keyPath: KeyPath<State, Value>) -> Value {
         return state[keyPath: keyPath]
     }
 
     // input subscript
-    subscript<Value>(dynamicMember keyPath: KeyPath<InputWrapper<Input>, (Value) -> Void>) -> (Value) -> Void {
+    public subscript<Value>(dynamicMember keyPath: KeyPath<InputWrapper<Input>, (Value) -> Void>) -> (Value) -> Void {
         return { [input] value in
             input[keyPath: keyPath](value)
         }
     }
 
     // input subscript
-    subscript(dynamicMember keyPath: KeyPath<InputWrapper<Input>, (()) -> Void>) -> () -> Void {
+    public subscript(dynamicMember keyPath: KeyPath<InputWrapper<Input>, (()) -> Void>) -> () -> Void {
         return { [input] in
             input[keyPath: keyPath](())
         }
@@ -106,7 +102,7 @@ extension ViewModelProtocol {
 
 extension ObservableObject where Self: ViewModelProtocol {
 
-    var objectWillChange: AnyPublisher<Void, Never> {
+    public var objectWillChange: AnyPublisher<Void, Never> {
         let triggers = Mirror(reflecting: state).children
             .compactMap { $0.value as? RxPublishedType }
             .map { $0.asTriggerObservable() }

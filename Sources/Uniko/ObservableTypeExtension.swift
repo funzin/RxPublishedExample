@@ -10,7 +10,7 @@ import RxSwift
 import Combine
 
 extension ObservableType {
-    func assign(to published: inout Self) {
+    public func assign(to published: inout Self) {
         published = self
     }
 }
