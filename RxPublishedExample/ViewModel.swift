@@ -25,19 +25,7 @@ protocol Bindable {
 typealias ViewModel<B: Bindable> = BaseViewModel<B> & Bindable
 
 @dynamicMemberLookup
-final class StateWrapper<State> {
-    private let state: State
-    init(state: State) {
-        self.state = state
-    }
-    
-    subscript<Value>(dynamicMember keyPath: KeyPath<State, Value>) -> Value {
-        return state[keyPath: keyPath]
-    }
-}
-
-@dynamicMemberLookup
-final class InputWrapper<Input> {
+struct InputWrapper<Input> {
     private let input: Input
     
     init(input: Input) {
@@ -70,14 +58,14 @@ class BaseViewModel<B: Bindable> {
     typealias Dependency = B.Dependency
     
     let input: InputWrapper<Input>
-    let state: StateWrapper<State>
+    private(set) var state: State
     private let disposeBag = DisposeBag()
     
     init(input: Input,
          state: inout State,
          dependency: Dependency) {
         self.input = InputWrapper(input: input)
-        self.state = StateWrapper(state: state)
+        self.state = state
         B.bind(inputObservable: InputObservable(input: input),
                state: &state,
                dependency: dependency,
@@ -90,13 +78,13 @@ protocol BaseObservableObject: ObservableObject {
     associatedtype Input
     associatedtype State
     var input: InputWrapper<Input> { get }
-    var state: StateWrapper<State> { get }
+    var state: State { get }
 }
 
 extension BaseObservableObject {
     
     // state subscript
-    subscript<Value>(dynamicMember keyPath: KeyPath<StateWrapper<State>, Value>) -> Value {
+    subscript<Value>(dynamicMember keyPath: KeyPath<State, Value>) -> Value {
         return state[keyPath: keyPath]
     }
     
