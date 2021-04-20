@@ -22,8 +22,6 @@ public protocol Bindable {
                      disposeBag: DisposeBag)
 }
 
-public typealias ViewModel<B: Bindable> = BaseViewModel<B> & Bindable
-
 @dynamicMemberLookup
 public struct InputWrapper<Input> {
     private let input: Input
@@ -52,7 +50,7 @@ public struct InputObservable<Input> {
     }
 }
 
-open class BaseViewModel<B: Bindable>: ViewModelProtocol {
+public final class ViewModel<B: Bindable>: ViewModelProtocol {
     public let input: InputWrapper<B.Input>
     public private(set) var state: B.State
     private let disposeBag = DisposeBag()

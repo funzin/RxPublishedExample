@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import Uniko
 
 @main
 struct RxPublishedExampleApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView(viewModel: ContentViewModel(dependency: .init()))
+            ContentView(viewModel: ViewModel<ContentBinder>(dependency: .init()))
         }
     }
 }

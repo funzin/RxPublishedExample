@@ -12,8 +12,10 @@ import RxCombine
 import Combine
 import Uniko
 
-struct ContentView<VM: ContentViewModelProtocol & ObservableObject>: View {
-    @StateObject var viewModel: VM
+extension ViewModel: ObservableObject {}
+
+struct ContentView: View {
+    @StateObject var viewModel: ViewModel<ContentBinder>
     
     var body: some View {
         Text("\(viewModel.count)")
@@ -24,30 +26,19 @@ struct ContentView<VM: ContentViewModelProtocol & ObservableObject>: View {
     }
 }
 
-// NOTE: Can use for non-SwiftUI.
-protocol ContentViewModelProtocol: ViewModelProtocol where State == ContentViewModel.State,
-                                                           Input == ContentViewModel.Input {
-}
+enum ContentBinder: Bindable {
 
-// NOTE: Can use for non-SwiftUI.
-final class ContentViewModel: ViewModel<ContentViewModel>, ContentViewModelProtocol {
-    
     struct Dependency {}
-    
+
     struct Input {
         let didTapStartButton = PublishRelay<Void>()
     }
-    
+
     struct State {
         @RxPublished
         fileprivate(set) var count: Int = 0
     }
-    
-    convenience init(dependency: Dependency) {
-        var state = State()
-        self.init(input: .init(), state: &state, dependency: .init())
-    }
-    
+
     static func bind(inputObservable: InputObservable<Input>,
                      state: inout State,
                      dependency: Dependency,
@@ -60,6 +51,11 @@ final class ContentViewModel: ViewModel<ContentViewModel>, ContentViewModelProto
     }
 }
 
-#if canImport(Combine)
-extension ContentViewModel: ObservableObject {}
-#endif
+extension ViewModel where B == ContentBinder {
+
+    convenience init(dependency: ContentBinder.Dependency) {
+        var state = State()
+        self.init(input: .init(), state: &state, dependency: .init())
+    }
+
+}

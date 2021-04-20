@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3391B466262EA65F00D3B466 /* Uniko in Frameworks */ = {isa = PBXBuildFile; productRef = 3391B465262EA65E00D3B466 /* Uniko */; };
+		3391B472262EB05C00D3B466 /* Uniko in Frameworks */ = {isa = PBXBuildFile; productRef = 3391B471262EB05C00D3B466 /* Uniko */; };
 		AFCE3303262B24EE003147CE /* RxPublishedExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCE3302262B24EE003147CE /* RxPublishedExampleApp.swift */; };
 		AFCE3305262B24EE003147CE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCE3304262B24EE003147CE /* ContentView.swift */; };
 		AFCE3307262B24F0003147CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFCE3306262B24F0003147CE /* Assets.xcassets */; };
@@ -15,7 +15,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3391B461262EA59500D3B466 /* RxPublishedExample */ = {isa = PBXFileReference; lastKnownFileType = folder; name = RxPublishedExample; sourceTree = "<group>"; };
 		AFCE32FF262B24EE003147CE /* RxPublishedExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxPublishedExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFCE3302262B24EE003147CE /* RxPublishedExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxPublishedExampleApp.swift; sourceTree = "<group>"; };
 		AFCE3304262B24EE003147CE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -29,7 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3391B466262EA65F00D3B466 /* Uniko in Frameworks */,
+				3391B472262EB05C00D3B466 /* Uniko in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,7 +46,6 @@
 			isa = PBXGroup;
 			children = (
 				AFCE3301262B24EE003147CE /* RxPublishedExample */,
-				3391B461262EA59500D3B466 /* RxPublishedExample */,
 				AFCE3300262B24EE003147CE /* Products */,
 				3391B464262EA65E00D3B466 /* Frameworks */,
 			);
@@ -98,7 +96,7 @@
 			);
 			name = RxPublishedExample;
 			packageProductDependencies = (
-				3391B465262EA65E00D3B466 /* Uniko */,
+				3391B471262EB05C00D3B466 /* Uniko */,
 			);
 			productName = RxPublishedExample;
 			productReference = AFCE32FF262B24EE003147CE /* RxPublishedExample.app */;
@@ -345,7 +343,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3391B465262EA65E00D3B466 /* Uniko */ = {
+		3391B471262EB05C00D3B466 /* Uniko */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Uniko;
 		};
